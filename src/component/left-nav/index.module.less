@@ -1,0 +1,26 @@
+@border_radius:50%;
+.leftImgUl {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li{
+        width: calc(33.33% - 20px);
+        margin: 0 15px 15px 5px;
+        padding: 0;
+        border-radius: @border_radius;
+        box-shadow: 1px 1px 5px #ddd;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    li :hover{
+        box-shadow: 1px 1px 10px #ccc;
+        border-radius: @border_radius;
+    }
+    img{
+        width: 100%;
+    }
+  }

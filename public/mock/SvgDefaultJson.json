@@ -1,0 +1,91 @@
+{
+  "基础": [
+    {
+      "type": "AlternatorSvg",
+      "title": "发电机",
+      "create_type": "draggable",
+      "priview_img": "/img/AlternatorSvg.png",
+      "template": [
+        {
+          "tag": "ellipse",
+          "props": {
+            "stroke": {
+              "title": "外轮廓颜色",
+              "val": "#FF0000",
+              "type": "colorinputbox",
+              "edit": true
+            },
+            "strokeWidth": {
+              "title": "外轮廓厚度",
+              "val": 2,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "cx": {
+              "title": "圆点x坐标",
+              "val": 50,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "cy": {
+              "title": "圆点y坐标",
+              "val": 50,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "rx": {
+              "title": "水平半径",
+              "val": 35,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "ry": {
+              "title": "垂直半径",
+              "val": 35,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "transform": {
+              "title": "外轮廓位置信息",
+              "val": "translate(-50,-50)",
+              "type": "textinputbox",
+              "edit": true
+            }
+          },
+          "children": []
+        },
+        {
+          "tag": "path",
+          "props": {
+            "d": {
+              "title": "路径",
+              "val": "M30,50 C30,44 34,40 40,40 46,40 50,44 50,50 M50,50 C50,56 54,60 60,60 66,60 70,56 70,50",
+              "type": "textinputbox",
+              "edit": false
+            },
+            "stroke": {
+              "title": "内轮廓颜色",
+              "val": "#FF0000",
+              "type": "colorinputbox",
+              "edit": true
+            },
+            "strokeWidth": {
+              "title": "内轮廓厚度",
+              "val": 2,
+              "type": "numberinputbox",
+              "edit": true
+            },
+            "transform": {
+              "title": "内轮廓位置信息",
+              "val": "translate(-50,-50)",
+              "type": "textinputbox",
+              "edit": true
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "拓展": []
+}
