@@ -32,7 +32,7 @@ const CanvasMain = (props: IProps) => {
       const getattr = (template: ITemplate[]) => {
         return template.map((m) => {
           const temp_val = Object.keys(m.props).map((key) => {
-            return { [key]: (m.props as any)[key].val };
+            return { [key]: m.props[key].val };
           });
           let temp = {};
           temp_val.forEach((f) => {
@@ -42,14 +42,14 @@ const CanvasMain = (props: IProps) => {
             const result: IExtendAttr = {
               tag: m.tag,
               value: temp,
-              children: [],
+              children: []
             };
             return result;
           } else {
             const result: IExtendAttr = {
               tag: m.tag,
               value: temp,
-              children: getattr(m.children),
+              children: getattr(m.children)
             };
             return result;
           }
@@ -140,7 +140,6 @@ const mapDispatchToProps = (
 ) => {
   return {
     PushDoneSvg(done_data: IDoneData) {
-      console.log(done_data);
       dispatch({
         type: PUSH_DONE_SVG,
         payload: done_data,

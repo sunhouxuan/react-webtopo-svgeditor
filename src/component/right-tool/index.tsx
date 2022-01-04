@@ -1,9 +1,10 @@
-import { Divider, Form, Input, InputNumber } from "antd";
+import { Divider, Form, Input, InputNumber, Radio, Select } from "antd";
 import { connect } from "react-redux";
 import { IDoneData, IReduxState } from "../../model";
 import { SET_DONE_SVG } from "../../store/actionTypes";
 import indexless from "./index.module.less";
 import { useEffect, useState } from "react";
+const { Option } = Select;
 const RightTool = (props: IProps) => {
   const [svg_component_title, setComponentTitle] = useState("请先选择组件");
   const { select_svg_info, done_svg_data, svg_component_infos } = {
@@ -15,10 +16,10 @@ const RightTool = (props: IProps) => {
     (f) => f.type === done_svg?.type
   );
   useEffect(() => {
-  if (find_svg_component_info !== undefined) {
-    setComponentTitle(find_svg_component_info.title);
-  }
-  },[find_svg_component_info?.title])
+    if (find_svg_component_info !== undefined) {
+      setComponentTitle(find_svg_component_info.title);
+    }
+  }, [find_svg_component_info?.title]);
   const InputChangeEvent = <T extends keyof IDoneData>(
     property: T,
     val: IDoneData[T]
@@ -29,14 +30,15 @@ const RightTool = (props: IProps) => {
     done_svg[property] = val;
     props.SetDoneSvg(done_svg_data);
   };
-  const InputNumberChangeEvent = <T extends keyof IDoneData>(
+  const Ext_InputChangeEvent = <T extends keyof { [key: string]: any }>(
     property: T,
-    val: IDoneData[T]
+    val: any,
+    index: number
   ) => {
     if (done_svg == undefined) {
       return;
     }
-    done_svg[property] = val;
+    done_svg.extend_attr[index].value[property] = val;
     props.SetDoneSvg(done_svg_data);
   };
   return (
@@ -66,7 +68,7 @@ const RightTool = (props: IProps) => {
             min={0}
             defaultValue={0}
             value={done_svg?.position_x}
-            onChange={(val) => InputNumberChangeEvent("position_x", val)}
+            onChange={(val) => InputChangeEvent("position_x", val)}
           />
         </Form.Item>
         <Form.Item label="y轴坐标">
@@ -74,7 +76,7 @@ const RightTool = (props: IProps) => {
             min={0}
             defaultValue={0}
             value={done_svg?.position_y}
-            onChange={(val) => InputNumberChangeEvent("position_y", val)}
+            onChange={(val) => InputChangeEvent("position_y", val)}
           />
         </Form.Item>
         <Form.Item label="大小">
@@ -82,7 +84,7 @@ const RightTool = (props: IProps) => {
             min={0}
             defaultValue={0}
             value={done_svg?.scale}
-            onChange={(val) => InputNumberChangeEvent("scale", val)}
+            onChange={(val) => InputChangeEvent("scale", val)}
           />
         </Form.Item>
         <Form.Item label="旋转">
@@ -90,9 +92,87 @@ const RightTool = (props: IProps) => {
             min={0}
             defaultValue={0}
             value={done_svg?.rotate}
-            onChange={(val) => InputNumberChangeEvent("rotate", val)}
+            onChange={(val) => InputChangeEvent("rotate", val)}
           />
         </Form.Item>
+        {find_svg_component_info?.template.map((m, index) => {
+          return Object.keys(m.props).map((prop_key) => {
+            if (!m.props[prop_key].edit) {
+              return;
+            }
+            let Temp: any;
+            if (m.props[prop_key].type === "number_inputbox") {
+              Temp = (
+                <InputNumber
+                  min={0}
+                  defaultValue={0}
+                  value={done_svg?.extend_attr[index].value[prop_key]}
+                  onChange={(val) => Ext_InputChangeEvent(prop_key, val, index)}
+                />
+              );
+            } else if (m.props[prop_key].type === "color_inputbox") {
+              Temp = (
+                <input
+                  type="color"
+                  value={done_svg?.extend_attr[index].value[prop_key]}
+                  onChange={(e) =>
+                    Ext_InputChangeEvent(prop_key, e.target.value, index)
+                  }
+                />
+              );
+            } else if (m.props[prop_key].type === "radio_group") {
+              Temp = (
+                <Radio.Group
+                  onChange={(e) =>
+                    Ext_InputChangeEvent(prop_key, e.target.value, index)
+                  }
+                  value={done_svg?.extend_attr[index].value[prop_key]}
+                >
+                  {m.props[prop_key].props.map((p) => {
+                    return (
+                      <Radio key={p.label} value={p.value}>
+                        {p.label}
+                      </Radio>
+                    );
+                  })}
+                </Radio.Group>
+              );
+            } else if (m.props[prop_key].type === "select") {
+              Temp = (
+                <Select
+                  defaultValue={done_svg?.extend_attr[index].value[prop_key]}
+                  onChange={(val) => Ext_InputChangeEvent(prop_key, val, index)}
+                >
+                  {m.props[prop_key].props.map((p) => {
+                    return (
+                      <Option key={p.label} value={p.value}>
+                        {p.label}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              );
+            } else {
+              Temp = (
+                <Input
+                  placeholder={`请输入${m.props[prop_key].title}`}
+                  value={done_svg?.extend_attr[index].value[prop_key]}
+                  onChange={(e) =>
+                    Ext_InputChangeEvent(prop_key, e.target.value, index)
+                  }
+                />
+              );
+            }
+            return (
+              <Form.Item
+                label={m.props[prop_key].title}
+                key={index + m.props[prop_key].title}
+              >
+                {Temp}
+              </Form.Item>
+            );
+          });
+        })}
       </Form>
     </>
   );

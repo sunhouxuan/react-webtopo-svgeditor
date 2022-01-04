@@ -12,43 +12,43 @@
             "stroke": {
               "title": "外轮廓颜色",
               "val": "#FF0000",
-              "type": "colorinputbox",
+              "type": "color_inputbox",
               "edit": true
             },
             "strokeWidth": {
               "title": "外轮廓厚度",
               "val": 2,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "cx": {
               "title": "圆点x坐标",
               "val": 50,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "cy": {
               "title": "圆点y坐标",
               "val": 50,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "rx": {
               "title": "水平半径",
               "val": 35,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "ry": {
               "title": "垂直半径",
               "val": 35,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "transform": {
               "title": "外轮廓位置信息",
               "val": "translate(-50,-50)",
-              "type": "textinputbox",
+              "type": "text_inputbox",
               "edit": true
             }
           },
@@ -60,25 +60,151 @@
             "d": {
               "title": "路径",
               "val": "M30,50 C30,44 34,40 40,40 46,40 50,44 50,50 M50,50 C50,56 54,60 60,60 66,60 70,56 70,50",
-              "type": "textinputbox",
+              "type": "text_inputbox",
               "edit": false
             },
             "stroke": {
               "title": "内轮廓颜色",
               "val": "#FF0000",
-              "type": "colorinputbox",
+              "type": "color_inputbox",
               "edit": true
             },
             "strokeWidth": {
               "title": "内轮廓厚度",
               "val": 2,
-              "type": "numberinputbox",
+              "type": "number_inputbox",
               "edit": true
             },
             "transform": {
               "title": "内轮廓位置信息",
               "val": "translate(-50,-50)",
-              "type": "textinputbox",
+              "type": "text_inputbox",
+              "edit": true
+            }
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "CircuitBreakerSvg",
+      "title": "断路器",
+      "create_type": "draggable",
+      "priview_img": "/img/CircuitBreakerSvg.png",
+      "template": [
+        {
+          "tag": "rect",
+          "props": {
+            "x": {
+              "title": "起点x坐标",
+              "val": 0,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "y": {
+              "title": "起点y坐标",
+              "val": 0,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "width": {
+              "title": "宽度",
+              "val": 20,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "height": {
+              "title": "高度",
+              "val": 40,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "fill": {
+              "title": "填充颜色",
+              "val": "#00FF00",
+              "type": "radio_group",
+              "edit": true,
+              "props": [
+                {
+                  "value": "#FF0000",
+                  "label": "断开"
+                },
+                {
+                  "value": "#00FF00",
+                  "label": "连接"
+                }
+              ]
+            },
+            "transform": {
+              "title": "位置信息",
+              "val": "translate(-10,-20)",
+              "type": "text_inputbox",
+              "edit": true
+            }
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "TextSvg",
+      "title": "文字",
+      "create_type": "draggable",
+      "priview_img": "/img/TextSvg.png",
+      "template": [
+        {
+          "tag": "text",
+          "props": {
+            "x": {
+              "title": "起点x坐标",
+              "val": 0,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "y": {
+              "title": "起点y坐标",
+              "val": 0,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "fontFamily": {
+              "title": "字体",
+              "val": "Microsoft YaHei",
+              "type": "select",
+              "edit": true,
+              "props":[
+                {
+                  "value": "Microsoft YaHei",
+                  "label": "微软雅黑"
+                },
+                {
+                  "value": "NSimSun",
+                  "label": "新宋体"
+                }
+              ]
+            },
+            "fontSize": {
+              "title": "字体大小",
+              "val": 15,
+              "type": "number_inputbox",
+              "edit": true
+            },
+            "fill": {
+              "title": "字体颜色",
+              "val": "#FF0000",
+              "type": "color_inputbox",
+              "edit": true
+            },
+            "transform": {
+              "title": "位置信息",
+              "val": "translate(-10,-20)",
+              "type": "text_inputbox",
+              "edit": true
+            },
+            "slots":{
+              "title": "标签插槽",
+              "val": "我是文字",
+              "type": "text_inputbox",
               "edit": true
             }
           },

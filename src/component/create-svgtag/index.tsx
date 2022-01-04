@@ -20,7 +20,7 @@ const createSvgTag = (props: IProps) => {
   const slotJSX = (ext: IExtendAttr, id: string) => {
     const Tag: any = ext.tag;
     if (ext.children.length < 1) {
-      return <Tag key={id} {...ext.value}></Tag>;
+      return <Tag key={id} {...ext.value}>{ext.value.slots}</Tag>;
     } else {
       return (
         <Tag key={id} {...ext.value}>

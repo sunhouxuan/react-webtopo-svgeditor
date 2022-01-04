@@ -18,8 +18,19 @@ export interface ISvgComponentData {
 }
 export interface ITemplate {
   tag: string;
-  props: object;
+  props: { [key: string]: ITemplateProps };
   children: Array<ITemplate>;
+}
+export interface ITemplateProps {
+  edit: string;
+  title: string;
+  type: string;
+  val: any;
+  props:Array<ITemplatePropsChildrenProps>
+}
+export interface ITemplatePropsChildrenProps{
+  value:any,
+  label:string
 }
 /**
  *组件默认配置文件
@@ -85,6 +96,6 @@ export interface IDoneData {
  */
 export interface IExtendAttr {
   tag: string;
-  value: object;
+  value: { [key: string]: any };
   children: Array<IExtendAttr>;
 }

@@ -22,9 +22,7 @@ const LeftNav = (props: IProps) => {
     e: React.DragEvent
   ) => {
     //设置要创建的svg组件信息
-    console.log("setCreatSvgInfo", leftImgItem);
     props.changeCreateSvgType(leftImgItem.type);
-    console.log(props.state);
 
     // console.log(e);
   };
@@ -42,13 +40,13 @@ const LeftNav = (props: IProps) => {
       <Collapse accordion>
         {Object.keys(props?.svg_default_json)?.map((key) => (
           <Panel header={key} key={key}>
-            {props.svg_default_json[key].map((m) => {
-              useEffect(() => {
-                props.pushSvgCompontentInfos(m);
-              }, []);
-              return (
-                <ul className={indexless.leftImgUl} key={m.type}>
-                  <li>
+            <ul className={indexless.leftImgUl}>
+              {props.svg_default_json[key].map((m) => {
+                useEffect(() => {
+                  props.pushSvgCompontentInfos(m);
+                }, []);
+                return (
+                  <li key={m.type}>
                     <img
                       src={m.priview_img}
                       draggable="true"
@@ -56,9 +54,9 @@ const LeftNav = (props: IProps) => {
                       onDragEnd={(e) => dragEndEvent(m, e)}
                     />
                   </li>
-                </ul>
-              );
-            })}
+                );
+              })}
+            </ul>
           </Panel>
         ))}
       </Collapse>
